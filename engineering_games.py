@@ -34,8 +34,11 @@ class EngineeringGames:
         print("  4. Stress & Strain Problems")
         print("  5. Beam Loading Quiz")
         print("  6. Material Properties Match")
-        print("  7. View Achievements")
-        print("  8. Exit")
+        print("  7. Tutorial Mode (Learn the Concepts)")
+        print("  8. View Achievements")
+        print("  9. Exit")
+        print("-"*60)
+        print("  TIP: Type 'hint' during any game for help!")
         print("="*60)
 
     def start_game(self):
@@ -48,7 +51,7 @@ class EngineeringGames:
         while True:
             self.display_menu()
             try:
-                choice = input("\n  Select a game (1-8): ").strip()
+                choice = input("\n  Select a game (1-9): ").strip()
 
                 if choice == '1':
                     self.force_vector_game()
@@ -63,12 +66,14 @@ class EngineeringGames:
                 elif choice == '6':
                     self.material_properties_game()
                 elif choice == '7':
-                    self.show_achievements()
+                    self.tutorial_mode()
                 elif choice == '8':
+                    self.show_achievements()
+                elif choice == '9':
                     self.exit_game()
                     break
                 else:
-                    print("  Invalid choice! Please enter 1-8.")
+                    print("  Invalid choice! Please enter 1-9.")
 
             except KeyboardInterrupt:
                 print(f"\n\n  Goodbye, {self.player_name}!")
@@ -92,6 +97,332 @@ class EngineeringGames:
             print("  No achievements yet. Keep playing!")
         print("="*60)
         input("  Press Enter to continue...")
+
+    def tutorial_mode(self):
+        """Interactive tutorial for each game type"""
+        print("\n" + "="*60)
+        print("  TUTORIAL MODE - Learn Engineering Concepts")
+        print("="*60)
+        print("  1. Vector Addition Tutorial")
+        print("  2. Free Body Diagrams Tutorial")
+        print("  3. Unit Conversions Tutorial")
+        print("  4. Stress & Strain Tutorial")
+        print("  5. Beam Loading Tutorial")
+        print("  6. Material Properties Tutorial")
+        print("  7. Back to Main Menu")
+        print("="*60)
+
+        choice = input("\n  Select tutorial (1-7): ").strip()
+
+        if choice == '1':
+            self.tutorial_vectors()
+        elif choice == '2':
+            self.tutorial_fbd()
+        elif choice == '3':
+            self.tutorial_units()
+        elif choice == '4':
+            self.tutorial_stress()
+        elif choice == '5':
+            self.tutorial_beams()
+        elif choice == '6':
+            self.tutorial_materials()
+
+    def tutorial_vectors(self):
+        """Tutorial for vector addition"""
+        print("\n" + "="*60)
+        print("  VECTOR ADDITION TUTORIAL")
+        print("="*60)
+        print("""
+  Vectors have both MAGNITUDE and DIRECTION.
+
+  STEP 1: Break vectors into components
+    - Fx = F * cos(θ)  [horizontal component]
+    - Fy = F * sin(θ)  [vertical component]
+
+  STEP 2: Add all x-components together
+    - Rx = F1x + F2x + F3x + ...
+
+  STEP 3: Add all y-components together
+    - Ry = F1y + F2y + F3y + ...
+
+  STEP 4: Find resultant magnitude
+    - R = √(Rx² + Ry²)  [Pythagorean theorem]
+
+  STEP 5: Find resultant direction (if needed)
+    - θ = arctan(Ry/Rx)
+
+  EXAMPLE:
+    Force 1: 100 N at 0° (horizontal right)
+      F1x = 100 * cos(0°) = 100 N
+      F1y = 100 * sin(0°) = 0 N
+
+    Force 2: 100 N at 90° (vertical up)
+      F2x = 100 * cos(90°) = 0 N
+      F2y = 100 * sin(90°) = 100 N
+
+    Resultant:
+      Rx = 100 + 0 = 100 N
+      Ry = 0 + 100 = 100 N
+      R = √(100² + 100²) = √20000 = 141.4 N
+      θ = arctan(100/100) = 45°
+        """)
+        input("\n  Press Enter to continue...")
+
+    def tutorial_fbd(self):
+        """Tutorial for free body diagrams"""
+        print("\n" + "="*60)
+        print("  FREE BODY DIAGRAM TUTORIAL")
+        print("="*60)
+        print("""
+  A Free Body Diagram shows ALL forces acting on ONE object.
+
+  COMMON FORCES TO CONSIDER:
+
+  1. WEIGHT (W or mg)
+     - Always acts DOWNWARD
+     - Present on every object with mass
+     - W = mass × gravity
+
+  2. NORMAL FORCE (N)
+     - Acts PERPENDICULAR to contact surface
+     - Only exists when object touches surface
+     - On horizontal surface: points UP
+     - On incline: perpendicular to slope
+
+  3. FRICTION (f)
+     - Acts PARALLEL to contact surface
+     - Opposes motion or potential motion
+     - Only exists with contact
+
+  4. TENSION (T)
+     - Acts ALONG ropes/cables/strings
+     - Always pulls (never pushes)
+     - Acts AWAY from the object
+
+  5. APPLIED FORCE (F)
+     - External push or pull
+     - Direction specified in problem
+
+  KEY RULES:
+  - ONLY show forces on the ONE object
+  - Don't include forces the object exerts on others
+  - If no contact → no Normal, no Friction
+  - If floating/falling freely → only Weight
+  - Equal & opposite forces cancel in equilibrium
+
+  COMMON MISTAKES:
+  ✗ Including "motion" as a force
+  ✗ Adding forces from the object onto other things
+  ✗ Forgetting weight (it's ALWAYS there!)
+  ✗ Adding friction when surface is frictionless
+        """)
+        input("\n  Press Enter to continue...")
+
+    def tutorial_units(self):
+        """Tutorial for unit conversions"""
+        print("\n" + "="*60)
+        print("  UNIT CONVERSION TUTORIAL")
+        print("="*60)
+        print("""
+  STRATEGY: Use conversion factors as fractions equal to 1
+
+  COMMON CONVERSIONS:
+
+  LENGTH:
+    1 inch = 25.4 mm (exact)
+    1 foot = 0.3048 m (exact)
+    1 mile = 1.609 km
+
+  FORCE:
+    1 lbf = 4.448 N
+    1 kN = 1000 N
+
+  PRESSURE/STRESS:
+    1 psi = 6.895 kPa
+    1 MPa = 145 psi
+    1 Pa = 1 N/m²
+
+  POWER:
+    1 hp = 746 W
+    1 kW = 1000 W
+
+  TEMPERATURE:
+    °F = (9/5)°C + 32
+    °C = (5/9)(°F - 32)
+    K = °C + 273.15
+
+  MASS:
+    1 kg = 2.205 lbm
+    1 slug = 14.59 kg
+
+  EXAMPLE CONVERSION:
+    Convert 50 psi to MPa:
+      50 psi × (6.895 kPa / 1 psi) × (1 MPa / 1000 kPa)
+      = 50 × 6.895 / 1000
+      = 0.345 MPa
+
+  TIP: Write out units and cancel them like fractions!
+        """)
+        input("\n  Press Enter to continue...")
+
+    def tutorial_stress(self):
+        """Tutorial for stress and strain"""
+        print("\n" + "="*60)
+        print("  STRESS & STRAIN TUTORIAL")
+        print("="*60)
+        print("""
+  STRESS (σ) = Force / Area
+    - Units: Pa, MPa, psi
+    - Normal stress: perpendicular to surface
+    - Shear stress: parallel to surface
+
+  STRAIN (ε) = Change in length / Original length
+    - Dimensionless (no units!)
+    - Usually very small (0.001, etc.)
+    - ε = ΔL / L₀
+
+  YOUNG'S MODULUS (E) = Stress / Strain
+    - Material property (constant for each material)
+    - Units: Pa, GPa, psi
+    - Slope of stress-strain curve (elastic region)
+    - σ = E × ε (Hooke's Law)
+
+  COMMON VALUES:
+    Steel: E ≈ 200 GPa
+    Aluminum: E ≈ 70 GPa
+    Copper: E ≈ 110 GPa
+
+  FACTOR OF SAFETY (FoS):
+    FoS = Failure Strength / Working Stress
+    FoS = Yield Strength / Allowable Stress
+    - Should be > 1 (typically 1.5-3 for design)
+    - Higher FoS = more conservative design
+
+  EXAMPLE:
+    Rod: diameter = 10 mm, force = 10 kN
+    Area = π(d/2)² = π(5)² = 78.54 mm²
+    Stress = 10,000 N / 78.54 mm² = 127.3 N/mm² = 127.3 MPa
+
+    If ε = 0.001 and σ = 127.3 MPa:
+    E = σ/ε = 127.3/0.001 = 127,300 MPa = 127.3 GPa
+        """)
+        input("\n  Press Enter to continue...")
+
+    def tutorial_beams(self):
+        """Tutorial for beam loading"""
+        print("\n" + "="*60)
+        print("  BEAM LOADING TUTORIAL")
+        print("="*60)
+        print("""
+  BEAM TYPES:
+  1. Simply Supported: Pin on one end, roller on other
+  2. Cantilever: Fixed on one end, free on other
+  3. Fixed: Both ends restrained
+
+  LOADING TYPES:
+  - Point Load (P): Concentrated at one location
+  - Distributed Load (w): Spread over length (kN/m)
+  - Moment (M): Twisting force
+
+  EQUILIBRIUM EQUATIONS:
+    ΣFy = 0  [sum of vertical forces]
+    ΣFx = 0  [sum of horizontal forces]
+    ΣM = 0   [sum of moments about any point]
+
+  COMMON FORMULAS:
+
+  Simply Supported + Center Point Load P:
+    - Each reaction = P/2
+    - Max moment = PL/4 (at center)
+
+  Simply Supported + UDL (w over length L):
+    - Each reaction = wL/2
+    - Max moment = wL²/8 (at center)
+
+  Cantilever + End Load P:
+    - Reaction at fixed end = P
+    - Moment at fixed end = PL
+    - Max moment = PL (at fixed end)
+
+  KEY CONCEPTS:
+  - Moment = Force × Distance
+  - Moment is ZERO at simple supports (pin/roller)
+  - Moment is MAXIMUM where shear = 0
+  - Sign convention: usually positive upward
+
+  EXAMPLE:
+    Beam: 6 m long, simply supported
+    Load: 12 kN at center
+    Reactions: R₁ = R₂ = 12/2 = 6 kN
+    Max Moment: M = PL/4 = 12×6/4 = 18 kN·m
+        """)
+        input("\n  Press Enter to continue...")
+
+    def tutorial_materials(self):
+        """Tutorial for material properties"""
+        print("\n" + "="*60)
+        print("  MATERIAL PROPERTIES TUTORIAL")
+        print("="*60)
+        print("""
+  KEY MATERIAL PROPERTIES:
+
+  1. YOUNG'S MODULUS (E) - Stiffness
+     - Resistance to elastic deformation
+     - Higher E = stiffer material
+     - Steel > Titanium > Copper > Aluminum
+
+  2. YIELD STRENGTH - Plastic deformation begins
+     - Stress where permanent deformation starts
+     - Important for design limits
+
+  3. ULTIMATE STRENGTH - Maximum stress before failure
+
+  4. DENSITY (ρ) - Mass per volume
+     - Important for weight-critical designs
+     - Aluminum < Titanium < Steel < Copper
+
+  5. THERMAL CONDUCTIVITY (k) - Heat transfer
+     - Copper > Aluminum > Steel > Titanium
+     - Important for heat exchangers, electronics
+
+  6. CORROSION RESISTANCE
+     - Stainless steel, titanium: excellent
+     - Aluminum: good (oxide layer)
+     - Carbon steel: poor (rusts)
+
+  7. POISSON'S RATIO (ν) - Lateral vs axial strain
+     - Most metals: ~0.3
+     - Measures how much material "bulges" when compressed
+
+  MATERIAL SELECTION:
+  - Aerospace: Titanium, Al alloys (low density, high strength)
+  - Structures: Steel (high strength, low cost)
+  - Electrical: Copper (high conductivity)
+  - Turbines: Nickel superalloys (high temp strength)
+  - Corrosive environments: Stainless steel, titanium
+
+  REMEMBER:
+  No single "best" material - it depends on application!
+  Consider: strength, weight, cost, environment, manufacturing
+        """)
+        input("\n  Press Enter to continue...")
+
+    def get_answer_with_hint(self, prompt_text, hint_text, answer_type=float):
+        """Get user answer with optional hint support"""
+        while True:
+            user_input = input(prompt_text).strip()
+
+            if user_input.lower() == 'hint':
+                print(f"\n  💡 HINT: {hint_text}\n")
+                continue
+
+            try:
+                return answer_type(user_input)
+            except ValueError:
+                if user_input.lower() in ['help', 'h', '?']:
+                    print(f"\n  💡 HINT: {hint_text}\n")
+                    continue
+                return None
 
     def exit_game(self):
         """Exit with summary"""
@@ -141,29 +472,30 @@ class EngineeringGames:
             print(f"\n  What is the MAGNITUDE of the resultant force?")
             print(f"  (Hint: Fx = {result_x:.1f} N, Fy = {result_y:.1f} N)")
 
-            try:
-                user_mag = float(input("  Your answer (N): "))
+            hint = f"Use Pythagorean theorem: R = √(Fx² + Fy²) = √({result_x:.1f}² + {result_y:.1f}²)"
+            user_mag = self.get_answer_with_hint("  Your answer (N, or type 'hint'): ", hint)
 
-                error = abs(user_mag - result_mag)
-
-                if error <= 1:
-                    points = 20
-                    print(f"  Excellent! Correct: {result_mag:.1f} N")
-                elif error <= 5:
-                    points = 15
-                    print(f"  Good! Answer: {result_mag:.1f} N (you: {user_mag:.1f})")
-                elif error <= 10:
-                    points = 10
-                    print(f"  Close! Answer: {result_mag:.1f} N (you: {user_mag:.1f})")
-                else:
-                    points = 0
-                    print(f"  Not quite. Answer: {result_mag:.1f} N")
-
-                print(f"  Points: +{points}")
-                score += points
-
-            except ValueError:
+            if user_mag is None:
                 print("  Invalid input! Skipping...")
+                continue
+
+            error = abs(user_mag - result_mag)
+
+            if error <= 1:
+                points = 20
+                print(f"  Excellent! Correct: {result_mag:.1f} N")
+            elif error <= 5:
+                points = 15
+                print(f"  Good! Answer: {result_mag:.1f} N (you: {user_mag:.1f})")
+            elif error <= 10:
+                points = 10
+                print(f"  Close! Answer: {result_mag:.1f} N (you: {user_mag:.1f})")
+            else:
+                points = 0
+                print(f"  Not quite. Answer: {result_mag:.1f} N")
+
+            print(f"  Points: +{points}")
+            score += points
 
         print(f"\n  Game Over! Score: {score}/{rounds*20}")
         self.total_score += score
